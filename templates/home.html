@@ -1,7 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
   {% for post in posts %}
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.content }}</p>
+    <article class="content-section py-3 px-4 mb-4 bg-white rounded shadow">
+      <div class="flex items-start gap-4">
+        <img class="rounded-full flex-shrink-0"
+             src="{{ url_for('static', path='profile_pics/default.jpg') }}"
+             alt="{{ post.author }}'s profile picture"
+             width="64"
+             height="64"
+             loading="lazy">
+        <div class="flex-grow">
+          <div class="article-metadata mb-2">
+            <a class="mr-2 text-blue-600 hover:text-blue-800" href="#">{{ post.author }}</a>
+            <small class="text-gray-500">{{ post.date_posted }}</small>
+          </div>
+          <h2>
+            <a class="article-title text-2xl font-semibold text-gray-900 hover:text-blue-600" href="#">{{ post.title }}</a>
+          </h2>
+          <p class="article-content text-gray-700 mt-2">{{ post.content }}</p>
+        </div>
+      </div>
+    </article>
   {% endfor %}
 {% endblock content %}
