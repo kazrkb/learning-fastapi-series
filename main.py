@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 app = FastAPI()
 
-
+templates = Jinja2Templates(directory="templates")
 
 posts: list[dict] = [
     {
@@ -22,10 +22,10 @@ posts: list[dict] = [
     }
 ]
 
-@app.get("/", response_class=HTMLResponse, include_in_schema=False)
-@app.get("/posts", response_class=HTMLResponse, include_in_schema=False)
-def home():
-    return f"<h1>Welcome to the Blog API</h1><p>There are {len(posts)} posts available.</p>"
+@app.get("/", include_in_schema=False)
+@app.get("/posts", include_in_schema=False)
+def home(request: Request):
+    return templates.TemplateResponse(request, "home.html", {"posts": posts})
 
 @app.get("/api/posts")
 def get_posts():
