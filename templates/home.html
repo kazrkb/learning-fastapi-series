@@ -15,7 +15,7 @@
             <small class="text-gray-500">{{ post.date_posted }}</small>
           </div>
           <h2>
-            <a class="article-title text-2xl font-semibold text-gray-900 hover:text-blue-600" href="#">{{ post.title }}</a>
+            <a class="article-title text-2xl font-semibold text-gray-900 hover:text-blue-600" href="{{ url_for('get_post', post_id=post.id) }}">{{ post.title }}</a>
           </h2>
           <p class="article-content text-gray-700 mt-2">{{ post.content }}</p>
         </div>
